@@ -1,0 +1,25 @@
+<section class="container my-5">
+    <h2 class="text-center">Tendencias</h2>
+    
+    <!-- Películas populares -->
+    <div class="row">
+      <div class="col-md-4" *ngFor="let movie of popularMovies">
+        <div class="card mb-4">
+          <img [src]="movie.thumbnail" class="card-img-top" alt="Poster de {{ movie.title }}" />
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <p class="card-text">Puntuación: {{ movie.rating }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bandas sonoras en tendencia -->
+    <h3 class="text-center mt-5">Nuevas Bandas Sonoras</h3>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let song of trendingSongs">
+        {{ song.name }} - {{ song.artist }}
+      </li>
+    </ul>
+  </section>
+  
