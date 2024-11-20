@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { RecommendationsComponent } from './recommendations/recommendations.component';
-import { TrendsComponent } from './trends/trends.component';
-import { HistoryComponent } from './history/history.component';
-import { SearchComponent } from './search/search.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { RecommendationsComponent } from './components/recommendations/recommendations.component';
+import { TrendsComponent } from './components/trends/trends.component';
+import { HistoryComponent } from './components/history/history.component';
+import { SearchComponent } from './pages/search/search.component';
 import { FavoritesComponent } from './favorites/favorites.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 // Definición de las rutas
 export const routes: Routes = [
