@@ -1,11 +1,14 @@
 <div class="container mt-4">
-    <h2 class="text-center">Lista de Usuarios Registrados</h2>
-    
-    <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+  <h2 class="text-center">Lista de Usuarios Registrados</h2>
+
+  @if (errorMessage) {
+    <div class="alert alert-danger" role="alert">
       {{ errorMessage }}
     </div>
-  
-    <table class="table table-striped mt-3" *ngIf="usuarios.length > 0">
+  }
+
+  @if (usuarios.length > 0) {
+    <table class="table table-striped mt-3">
       <thead>
         <tr>
           <th>ID</th>
@@ -14,14 +17,19 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let usuario of usuarios">
-          <td>{{ usuario.id }}</td>
-          <td>{{ usuario.username }}</td>
-          <td>{{ usuario.email }}</td>
-        </tr>
+        @for (usuario of usuarios; track usuario) {
+          <tr>
+            <td>{{ usuario.id }}</td>
+            <td>{{ usuario.username }}</td>
+            <td>{{ usuario.email }}</td>
+          </tr>
+        }
       </tbody>
     </table>
-  
-    <p class="text-center" *ngIf="usuarios.length === 0">No hay usuarios registrados.</p>
-  </div>
-  
+  }
+
+  @if (usuarios.length === 0) {
+    <p class="text-center">No hay usuarios registrados.</p>
+  }
+</div>
+

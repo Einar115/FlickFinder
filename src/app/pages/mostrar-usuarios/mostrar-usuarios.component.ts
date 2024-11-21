@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
 import { UsuarioService } from '../../services/Usuario/usuario.service';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-mostrar-usuarios',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './mostrar-usuarios.component.html',
   styleUrl: './mostrar-usuarios.component.css'
 })

@@ -1,25 +1,26 @@
 <div class="container mt-4">
-    <h2 class="mb-4">Resultados de la búsqueda</h2>
-    
-    <!-- Grid de resultados -->
-    <div class="row">
-      <!-- Card 1 -->
-      <div class="col-md-4" *ngFor="let result of searchResults">
+  <h2 class="mb-4">Resultados de la búsqueda</h2>
+
+  <!-- Grid de resultados -->
+  <div class="row">
+    <!-- Card 1 -->
+    @for (result of searchResults; track result) {
+      <div class="col-md-4">
         <div class="card mb-4">
           <img
             src="https://via.placeholder.com/150"
             class="card-img-top"
             alt="Imagen de ejemplo"
-          />
-          <div class="card-body">
-            <h5 class="card-title">{{ result.title }}</h5>
-            <p class="card-text">
-              {{ result.description }}
-            </p>
-            <a href="#" class="btn btn-primary">Más detalles</a>
+            />
+            <div class="card-body">
+              <h5 class="card-title">{{ result.title }}</h5>
+              <p class="card-text">
+                {{ result.description }}
+              </p>
+              <a href="#" class="btn btn-primary">Más detalles</a>
+            </div>
           </div>
         </div>
-      </div>
+      }
     </div>
   </div>
-  
