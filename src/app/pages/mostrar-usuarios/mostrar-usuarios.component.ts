@@ -25,8 +25,8 @@ export class MostrarUsuariosComponent implements OnInit {
         this.usuarios = data;
       },
       error: (err) => {
-        this.errorMessage = 'Error al cargar los usuarios';
-        console.error(err);
+        this.errorMessage = `Error al cargar los usuarios: ${err.message}`;
+        console.error('Detalles del error:', err);
       }
     });
   }

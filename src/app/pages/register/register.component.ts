@@ -14,7 +14,7 @@ import { UsuarioService } from '../../services/Usuario/usuario.service';
 export class RegisterComponent{
   IP: string = "localhost:8080"
   id: number = 1;
-  newUser: Usuario = new Usuario(0, '', '', '', '', '');
+  newUser: Usuario = new Usuario(1, '', '', '', '', '');
   usuarios: Usuario[] = [];
 
   constructor(private http: HttpClient, private userService: UsuarioService) {}
