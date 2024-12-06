@@ -6,8 +6,8 @@ export class Usuario {
     firstName: string; // Nombre
     lastName: string; // Apellido
     dateOfBirth?: Date; // Fecha de nacimiento (opcional)
-    favorites?: string[]; // Lista de películas favoritas (opcional)
-    profilePictureUrl?: string; // URL de la foto de perfil (opcional)
+   //favorites?: string[]; // Lista de películas favoritas (opcional)
+    //profilePictureUrl?: string; // URL de la foto de perfil (opcional)
   
     constructor(
       id: number,
@@ -17,8 +17,8 @@ export class Usuario {
       firstName: string,
       lastName: string,
       dateOfBirth?: Date,
-      favorites?: string[],
-      profilePictureUrl?: string
+      //favorites?: string[],
+      //profilePictureUrl?: string
     ) {
       this.id = id;
       this.username = username;
@@ -27,8 +27,8 @@ export class Usuario {
       this.firstName = firstName;
       this.lastName = lastName;
       this.dateOfBirth = dateOfBirth;
-      this.favorites = favorites || [];
-      this.profilePictureUrl = profilePictureUrl || '';
+      //this.favorites = favorites || [];
+      //this.profilePictureUrl = profilePictureUrl || '';
     }
   }
   

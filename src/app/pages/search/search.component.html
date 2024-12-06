@@ -1,26 +1,31 @@
 <div class="container mt-4">
-  <h2 class="mb-4">Resultados de la búsqueda</h2>
+  <!-- <h2 class="mb-4">Resultados de la búsqueda</h2>-->
+  <div class="search-bar">
+    <input type="text" [(ngModel)]="query" placeholder="Buscar películas" />
+    <button (click)="searchMovies()">Buscar</button>
+  </div>
 
   <!-- Grid de resultados -->
   <div class="row">
-    <!-- Card 1 -->
-    @for (result of searchResults; track result) {
-      <div class="col-md-4">
-        <div class="card mb-4">
-          <img
-            src="https://via.placeholder.com/150"
-            class="card-img-top"
-            alt="Imagen de ejemplo"
-            />
-            <div class="card-body">
-              <h5 class="card-title">{{ result.title }}</h5>
-              <p class="card-text">
-                {{ result.description }}
-              </p>
-              <a href="#" class="btn btn-primary">Más detalles</a>
+    @if (movies.length > 0) {
+      <div class="movie-results">
+        @for (movie of movies; track movie) {
+          <div class="movie-card">
+            @if (movie.poster_path) {
+              <img
+                [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path"
+                alt="{{ movie.title }}"
+                class="movie-poster"
+                />
+            }
+            <div class="movie-info">
+              <h3>{{ movie.title }}</h3>
+              <p>{{ movie.overview || 'Sin descripción disponible.' }}</p>
             </div>
           </div>
-        </div>
-      }
+        }
     </div>
+    }
   </div>
+</div>
+ 

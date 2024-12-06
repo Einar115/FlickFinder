@@ -17,10 +17,10 @@ export class RegisterComponent{
   newUser: Usuario = new Usuario(1, '', '', '', '', '');
   usuarios: Usuario[] = [];
 
-  constructor(private http: HttpClient, private userService: UsuarioService) {}
+  constructor(private http: HttpClient) {}
 
   register() {
-    this.http.post('http://'+this.IP+'/api/usuarios/register', this.newUser, { responseType: 'text' })
+    this.http.post('http://'+this.IP+'/api/usuarios/register', this.newUser)
       .subscribe(
         response => {
           console.log(response);
