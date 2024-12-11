@@ -14,56 +14,32 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item"><a class="nav-link" routerLink="/home">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/search">Buscar</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/favorites">Favoritos</a></li>
-        <!--<li>
-          <form class="d-flex">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Buscar películas o bandas sonoras"
-              aria-label="Search"
-              />
-              <button class="btn btn-outline-success me-2" type="submit">Buscar</button>
-            </form>
-          </li>-->
-        </ul>
-
-        <div class="d-flex align-items-center">
-          @if (!isLoggedIn) {
-            <button
-              class="btn btn-outline-primary me-2"
-              routerLink="/login"
-              >
-              Iniciar Sesión
-            </button>
-          }
-          @if (!isLoggedIn) {
-            <button
-              class="btn btn-outline-success"
-              routerLink="/register"
-              >
-              Registrarse
-            </button>
-          }
-          @if (isLoggedIn) {
-            <div class="d-flex align-items-center">
-              <button
-                class="btn btn-outline-warning me-2"
-                (click)="logout()"
-                >
-                Cerrar Sesión
-              </button>
-              <a
-                class="btn btn-outline-info"
-                routerLink="/profile"
-                >
-                {{ usuarioNombre }}
-              </a>
-            </div>
-          }
-        </div>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/search">Buscar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/favorites">Favoritos</a>
+        </li>
+      </ul>
+      <div class="d-flex align-items-center">
+        @if (!isLoggedIn) {
+          <button class="btn btn-outline-primary me-2" routerLink="/login">
+            Iniciar Sesión
+          </button>
+          <button class="btn btn-outline-success" routerLink="/register">
+            Registrarse
+          </button>
+        }
+        @if (isLoggedIn) {
+          <span class="text-white me-3">Bienvenido, {{ username }}</span>
+          <button class="btn btn-outline-warning me-2" (click)="logout()">
+            Cerrar Sesión
+          </button>
+        }
       </div>
     </div>
-  </nav>
+  </div>
+</nav>

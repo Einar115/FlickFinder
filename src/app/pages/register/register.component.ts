@@ -1,35 +1,47 @@
 
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Usuario } from '../../models/usuario.model';
-import { HttpClient } from '@angular/common/http';
 import { UsuarioService } from '../../services/Usuario/usuario.service';
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent{
-  IP: string = "localhost:8080"
-  id: number = 1;
-  newUser: Usuario = new Usuario(1, '', '', '', '', '');
-  usuarios: Usuario[] = [];
+  registerForm: FormGroup;
+  mensajeError: string | null = null;
 
-  constructor(private http: HttpClient) {}
-
-  register() {
-    this.http.post('http://'+this.IP+'/api/usuarios/register', this.newUser)
-      .subscribe(
-        response => {
-          console.log(response);
-          alert('Usuario registrado exitosamente.');
-        },
-        error => {
-          console.error(error);
-          alert('Error al registrar el usuario.');
-        }
-      );
+  constructor(
+    private fb: FormBuilder,
+    private usuarioService: UsuarioService
+  ) {
+    this.registerForm = this.fb.group({
+      nombreUsuario: ['', [Validators.required, Validators.minLength(3)]],
+      correo: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      fechaNacimiento: ['', Validators.required]
+    });
   }
+
+  onSubmit(): void {
+    if (this.registerForm.valid) {
+      const usuario: Usuario = this.registerForm.value;
+      this.usuarioService.register(usuario).subscribe({
+        next: () => {
+          alert('Registro exitoso');
+          this.registerForm.reset();
+        },
+        error: (err) => {
+          console.error(err);
+          this.mensajeError = err.error.message || 'Ocurrió un error en el registro';
+        }
+      });
+    } else {
+      this.mensajeError = 'Por favor, complete correctamente todos los campos.';
+    }
+  }
+  
 }

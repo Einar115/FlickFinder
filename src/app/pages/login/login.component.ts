@@ -1,6 +1,7 @@
-
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/Autentificador/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,12 +9,24 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
-  email: string = '';
-  password: string = '';
+export class LoginComponent{
+  username = '';
+  password = '';
+  errorMessage = '';
 
-  onSubmit(): void {
-    console.log('Correo:', this.email);
-    console.log('Contraseña:', this.password);
+  constructor(private authService: AuthService, private router: Router) {}
+
+  login(): void {
+    this.authService.login(this.username, this.password).subscribe(
+      (response) => {
+        localStorage.setItem('jwt_token', response.token);
+        this.router.navigate(['/home']).then(()=>{
+          window.location.reload();
+        });
+      },
+      (error) => {
+        this.errorMessage = 'Credenciales inválidas';
+      }
+    );
   }
 }

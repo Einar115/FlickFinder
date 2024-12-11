@@ -1,6 +1,7 @@
 
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/Autentificador/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,23 +10,23 @@ import { Router, RouterModule } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  isLoggedIn: boolean = false; // Simula el estado del usuario
-  usuarioNombre: string = ''; // Nombre del usuario autenticado
+  isLoggedIn = false;
+  username: string | null = '';
 
-  constructor(private router: Router) {
-    // Simulación para verificar si el usuario está logueado (puedes cambiar esta lógica)
-    const usuario = localStorage.getItem('usuario');
-    if (usuario) {
-      this.isLoggedIn = true;
-      this.usuarioNombre = JSON.parse(usuario).nombre || 'Usuario';
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.isLoggedIn = this.authService.isLoggedIn();
+    if (this.isLoggedIn) {
+      const decodedToken = this.authService.decodeToken();
+      this.username = decodedToken.sub;
     }
   }
 
   logout(): void {
-    // Lógica para cerrar sesión
-    localStorage.removeItem('usuario');
+    this.authService.logout();
     this.isLoggedIn = false;
-    this.usuarioNombre = '';
-    this.router.navigate(['/home']);
+    this.username = '';
   }
+
 }
