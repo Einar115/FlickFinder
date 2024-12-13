@@ -7,11 +7,20 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class PeliculaService {
-  
   private apiUrl:string = environment.backendUrl+'/movies';
+  
   constructor(private http: HttpClient) {}
 
   searchMovies(query: string): Observable<any>{
     return this.http.get(`${this.apiUrl}/search`, {params: {query}});
   }
+
+  getNowPlaying(): Observable<any>{
+    return this.http.get(`${this.apiUrl}/now-playing`);
+  }
+
+  getMovieDetails(movieId: number){
+    return this.http.get(`${this.apiUrl}/details/${movieId}`);
+  }
+
 }

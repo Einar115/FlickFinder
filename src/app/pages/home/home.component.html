@@ -4,7 +4,7 @@
   <p class="lead">Explora un mundo de entretenimiento personalizado.</p>
 </div>
 
-<!-- Recomendaciones -->
+<!-- Recomendaciones
 <section class="container my-5">
   <h2 class="text-center">Recomendaciones Personalizadas</h2>
   <div class="row">
@@ -20,29 +20,35 @@
       </div>
     }
   </div>
-</section>
+</section> -->
 
 <!-- Tendencias -->
 <section class="container my-5">
-  <h2 class="text-center">Tendencias</h2>
+  <h2 class="text-center">Películas en Emisión</h2>
   <div class="row">
     @for (movie of movies; track movie) {
       <div class="col-md-4">
         <div class="card mb-4">
-          <img [src]="movie.thumbnail" class="card-img-top" alt="Poster de {{ movie.title }}" />
+          <img [src]="'https://image.tmdb.org/t/p/w500' + movie.poster_path" class="card-img-top" alt="Poster de {{ movie.title }}" />
           <div class="card-body">
             <h5 class="card-title">{{ movie.title }}</h5>
-            <p class="card-text">Puntuación: {{ movie.rating }}</p>
+            <p class="card-text">Puntuación: {{ movie.vote_average }}</p>
+            <p class="card-text">{{ movie.release_date }}</p>
+            <button class="btn btn-primary" (click)="goToDetails(movie.id)">Más detalles</button>
           </div>
         </div>
       </div>
     }
   </div>
+</section>
+
+
+<section class="container my-5">
   <h3 class="text-center mt-5">Nuevas Bandas Sonoras</h3>
   <ul class="list-group">
-    @for (song of trendingSongs; track song) {
+    @for (track of tracks; track track) {
       <li class="list-group-item">
-        {{ song.name }} - {{ song.artist }}
+        {{ track.name }} - {{ track.artist }}
       </li>
     }
   </ul>

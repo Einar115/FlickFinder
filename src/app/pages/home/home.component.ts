@@ -1,5 +1,8 @@
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PeliculaService } from '../../services/Pelicula/pelicula.service';
+import { Router } from '@angular/router';
+import { SpotifyService } from '../../services/Spotify/spotify.service';
 
 @Component({
   selector: 'app-home',
@@ -7,19 +10,43 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+  movies: any[] = [];
+  tracks: any[] = [];
   isLoggedIn = false;
 
-  // Datos ficticios para las secciones
-  movies = [
-    { title: 'Película 1', thumbnail: 'url1.jpg', rating: 8.5 },
-    { title: 'Película 2', thumbnail: 'url2.jpg', rating: 7.8 },
-    { title: 'Película 3', thumbnail: 'url3.jpg', rating: 9.0 },
-  ];
+  constructor(private peliculaService: PeliculaService, private spotifyService: SpotifyService, private router:Router) {}
 
-  trendingSongs = [
-    { name: 'Canción 1', artist: 'Artista 1' },
-    { name: 'Canción 2', artist: 'Artista 2' },
-    { name: 'Canción 3', artist: 'Artista 3' },
-  ];
+  ngOnInit(): void {
+    this.loadNowPlayingMovies();
+    this.loadNewReleases();
+  }
+
+  loadNewReleases(): void{
+    this.spotifyService.getNewReleases().subscribe({
+      next: (response) => {
+        this.tracks=response.results;
+        console.log(this.tracks);
+      },
+      error:(err) =>{
+        console.error('Error al cargar los temas:', err)
+      }
+    })
+  }
+
+  loadNowPlayingMovies(): void {
+    this.peliculaService.getNowPlaying().subscribe({
+      next: (response) => {
+        this.movies = response.results; // TMDB devuelve un array en `results`
+        console.log(this.movies);
+      },
+      error: (err) => {
+        console.error('Error al cargar las películas:', err);
+      },
+    });
+  }
+
+  goToDetails(movieId: number): void {
+    this.router.navigate(['/movie', movieId]); // Navega a la ruta con el ID de la película
+  }
 }
