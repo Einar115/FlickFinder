@@ -23,7 +23,6 @@ export class RecomendacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerRecomendacionesPeliculas();
-    this.obtenerRecomendacionesAlbumes();
   }
 
   trackById(index: number, item: any): number {
@@ -51,27 +50,6 @@ export class RecomendacionComponent implements OnInit {
     }
   }
   
-   
-  obtenerRecomendacionesAlbumes(): void {
-    this.cargandoAlbumes = true;
-    const token = this.authService.getToken();
-  
-    if (token) {
-      this.recomendacionService.getRecomendacionesAlbumes(token).subscribe({
-        next: (response) => {
-          this.albumesRecomendados = response;
-          this.cargandoAlbumes = false;
-        },
-        error: (err) => {
-          console.error('Error al cargar las recomendaciones de álbumes:', err);
-          this.errorAlbumes = 'No se pudieron cargar las recomendaciones de álbumes.';
-          this.cargandoAlbumes = false;
-        },
-      });
-    } else {
-      this.errorAlbumes = 'No se encontró el token de autenticación.';
-    }
-  }
   
   goToDetails(movieId: number): void {
       this.router.navigate(['/movie', movieId]); // Navega a la ruta con el ID de la película

@@ -32,19 +32,4 @@ export class RecomendacionService {
   }
   
 
-  // Obtener recomendaciones de albumes
-  getRecomendacionesAlbumes(token: string): Observable<any[]> {
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-
-    return this.http.get<any[]>(`${this.apiUrl}/albumes`, { headers }).pipe(
-      map((response: any[]) => response), // La respuesta ya está procesada en el backend
-      catchError((error) => {
-        console.error('Error al procesar las recomendaciones:', error);
-        return of([]); // Devuelve un array vacío en caso de error
-      })
-    );
-  }
-
 }
