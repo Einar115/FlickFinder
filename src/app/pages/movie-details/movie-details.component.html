@@ -12,6 +12,9 @@
         @if (movie.homepage) {
           <a [href]="movie.homepage" class="btn btn-primary" target="_blank">Página oficial</a>
         }
+        @if (isLoggedIn) {
+          <button class="btn btn-success" (click)="addToFavorites('pelicula', movie.id)">Agregar a favoritos</button>
+        }
       </div>
     </div>
   </section>

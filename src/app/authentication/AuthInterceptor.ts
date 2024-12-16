@@ -4,15 +4,15 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-    intercept(req: HttpRequest<any>, next: HttpHandler) {
-        const token = localStorage.getItem('jwt_token');
-        if (token) {
-          req = req.clone({
-            setHeaders: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-        }
-        return next.handle(req);
-      }
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
+    const token = localStorage.getItem('jwt_token');
+    if (token) {
+      req = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+    }
+    return next.handle(req);
+  }
 }

@@ -11,15 +11,20 @@ export class SpotifyService {
 
   constructor(private http: HttpClient) {}
   
-  searchTracks(query:string):Observable<any>{
-    return this.http.get(`${this.apiUrl}/search`, { params: {query} });
+  searchAlbums(query: string) {
+    return this.http.get<any>(`${this.apiUrl}/search?query=${query}&type=album`);
+  }
+
+  searchTracks(query: string) {
+    return this.http.get<any>(`${this.apiUrl}/search?query=${query}&type=track`);
   }
 
   getNewReleases(): Observable<any>{
-    return this.http.get(`${this.apiUrl}/new-releases`);
+    return this.http.get(`${this.apiUrl}/new-albums`);
   }
 
   getTrackDetails(trackId: number){
     return this.http.get(`${this.apiUrl}/track/${trackId}`);
   }
+  
 }

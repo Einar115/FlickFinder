@@ -1,8 +1,7 @@
 export interface Preferencia {
     id: number;
-    usuarioId: number;
-    tipo: 'pelicula' | 'bandaSonora';
-    referenciaId: number;
+    tipo: 'pelicula' | 'album' | 'pista';
+    referenciaId:  number | string;
     fechaAgregada: string;
 }
   

@@ -1,0 +1,84 @@
+<div class="container my-5">
+  <!-- Recomendaciones de Películas -->
+  <div class="row">
+    <div class="col-12">
+      <h2 class="text-primary mb-4">Recomendaciones de Películas</h2>
+      @if (peliculasRecomendadas.slice(0, 18).length > 0) {
+        <div>
+          <div class="row">
+            @for (pelicula of peliculasRecomendadas.slice(0, 18); track pelicula) {
+              <div class="col-12 col-sm-6 col-md-3 col-lg-2 mb-4">
+                <div class="card h-100">
+                  @if (pelicula.poster_path) {
+                    <img
+                      [src]="'https://image.tmdb.org/t/p/w500' + pelicula.poster_path"
+                      class="card-img-top"
+                      alt="{{ pelicula.title }}"
+                      />
+                  }
+                  <div class="card-body p-2 text-center">
+                    <h6 class="card-title mb-2">{{ pelicula.title }}</h6>
+                    <p class="card-text">
+                      <small class="text-muted">Lanzamiento: {{ pelicula.release_date }}</small>
+                    </p>
+                    <button class="btn btn-primary btn-sm w-100 mb-2" (click)="goToDetails(pelicula.id)">
+                      Ver más detalles
+                    </button>
+                    <button class="btn btn-secondary btn-sm w-100" (click)="addToFavorites('pelicula', pelicula.id)">
+                      Añadir a favoritos
+                    </button>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+      @if (peliculasRecomendadas.length === 0) {
+        <div class="alert alert-warning">
+          No hay recomendaciones de películas por el momento.
+        </div>
+      }
+    </div>
+  </div>
+
+
+  <!-- Recomendaciones de Álbumes -->
+  <div class="row mt-5">
+    <div class="col-12">
+      <h2 class="text-success mb-4">Recomendaciones de Álbumes</h2>
+      @if (albumesRecomendados.length > 0) {
+        <div>
+          <div class="row">
+            @for (album of albumesRecomendados; track trackById($index, album)) {
+              <div class="col-12 col-sm-6 col-md-3 col-lg-2 mb-4">
+                <div class="card h-100">
+                  <img [src]="album.image" class="card-img-top" [alt]="album.name" />
+                  <div class="card-body p-2 text-center">
+                    <h6 class="card-title mb-2">{{ album.name }}</h6>
+                    <p class="card-text">
+                      <small class="text-muted">Artista: {{ album.artist }}</small>
+                    </p>
+                    <p class="card-text">
+                      <small class="text-muted">Lanzamiento: {{ album.release_date }}</small>
+                    </p>
+                    <button class="btn btn-primary btn-sm w-100 mb-2" (click)="goToDetails(album.id)">
+                      Ver más detalles
+                    </button>
+                    <button class="btn btn-secondary btn-sm w-100" (click)="addToFavorites('album', album.id)">
+                      Añadir a favoritos
+                    </button>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+      @if (albumesRecomendados.length === 0) {
+        <div class="alert alert-warning">
+          No hay recomendaciones de álbumes por el momento.
+        </div>
+      }
+    </div>
+  </div>
