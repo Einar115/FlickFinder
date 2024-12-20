@@ -11,7 +11,7 @@ export class RecomendacionService {
 
   constructor(private http: HttpClient) {}
 
-  // Obtener recomendaciones de peliculas
+  //Obtener recomendaciones de peliculas
   getRecomendacionesPeliculas(token: string): Observable<any[]> {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -26,10 +26,9 @@ export class RecomendacionService {
       }),
       catchError((error) => {
         console.error('Error al procesar las recomendaciones:', error);
-        return of([]); // Devuelve un array vacío en caso de error
+        return of([]);
       })
     );
   }
-  
 
 }

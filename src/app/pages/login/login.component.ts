@@ -16,6 +16,8 @@ export class LoginComponent{
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  /*compara el nombre y contraseña del usuario usando el authService 
+  y despues genera un jwt token en el almacenamiento local para mostrar el inicio de sesion*/
   login(): void {
     this.authService.login(this.username, this.password).subscribe(
       (response) => {
@@ -30,3 +32,4 @@ export class LoginComponent{
     );
   }
 }
+ 

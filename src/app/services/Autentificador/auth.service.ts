@@ -14,28 +14,34 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  //se reliza la peticion Post de inicio de sesion recibiendo el nombre de usuario y contraseña
   login(username: string, password: string): Observable<any> {
     return this.http.post(this.apiUrl, { username, password });
   }
 
+  //Se guarda el token generado por el JWT
   saveToken(token: string): void {
     localStorage.setItem('jwt_token', token);
   }
 
+  //se obtiene el token que se encuentra en el localStorage
   getToken(): string | null {
     return localStorage.getItem('jwt_token');
   }
 
+  //verifica si hay una sesion activa verificando si hay un token en el local storage
   isLoggedIn(): boolean {
     const token = this.getToken();
     return !!token;
   }
 
+  //cierra la sesion eliminando el token de inicio de sesion del local storage
   logout(): void {
     localStorage.removeItem('jwt_token');
     this.router.navigate(['/home']);
   }
 
+  //Decodifica el token para obtener datos como el nombre de usuario o correo y ser mostrados en la pagina
   decodeToken(): any {
     const token = this.getToken();
     if (token) {

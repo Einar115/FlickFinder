@@ -25,10 +25,7 @@ export class RecomendacionComponent implements OnInit {
     this.obtenerRecomendacionesPeliculas();
   }
 
-  trackById(index: number, item: any): number {
-    return item.id; // Usa "id" como clave única
-  }
-
+  //obtiene recomendaciones de peliculas dependiendo del usuario y sus preferencias agregadas
   obtenerRecomendacionesPeliculas(): void {
     this.cargandoPeliculas = true;
     const token = this.authService.getToken();
@@ -50,36 +47,37 @@ export class RecomendacionComponent implements OnInit {
     }
   }
   
-  
+  //Navega a la ruta con el ID de la pelicula
   goToDetails(movieId: number): void {
-      this.router.navigate(['/movie', movieId]); // Navega a la ruta con el ID de la película
-    }
-  
-    addToFavorites(tipo: 'pelicula' | 'album' | 'pista', referenciaId: number): void {
-      let token: string | null = this.authService.getToken();
-      console.log(token);
-    
-      if (!token) {
-        alert('Error, no se ha iniciado sesion');
-        return;
-      }
-  
-      const nuevaPreferencia: Preferencia = {
-        id: 0, // Será asignado por el backend
-        tipo,
-        referenciaId,
-        fechaAgregada: new Date().toISOString()
-      };
-  
-      this.preferenciaService.guardarPreferencia(token, nuevaPreferencia).subscribe({
-        next: (response) => {
-          console.log('Preferencia guardada con éxito:', response);
-          alert('¡Favorito agregado con éxito!');
-        },
-        error: (err) => {
-          console.error('Error al guardar la preferencia:', err);
-          alert('Error al agregar a favoritos.');
-        }
-      });
+      this.router.navigate(['/movie', movieId]); 
   }
+
+  //Añade a favoritos la pelicula o el album usando el servicio PreferenciaService
+  addToFavorites(tipo: 'pelicula' | 'album', referenciaId: number): void {
+    let token: string | null = this.authService.getToken();
+    console.log(token);
+
+    if (!token) {
+      alert('Error, no se ha iniciado sesion');
+      return;
+    }
+    const nuevaPreferencia: Preferencia = {
+      id: 0, // Sera asignado por el backend
+      tipo,
+      referenciaId,
+      fechaAgregada: new Date().toISOString()
+    };
+  
+    this.preferenciaService.guardarPreferencia(token, nuevaPreferencia).subscribe({
+      next: (response) => {
+        console.log('Preferencia guardada con éxito:', response);
+        alert('¡Favorito agregado con éxito!');
+      },
+      error: (err) => {
+        console.error('Error al guardar la preferencia:', err);
+        alert('Error al agregar a favoritos.');
+      }
+    });
+  }
+
 }

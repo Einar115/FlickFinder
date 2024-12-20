@@ -11,14 +11,17 @@ export class PeliculaService {
   
   constructor(private http: HttpClient) {}
 
+  //peticion para busqueda de peliculas con nombre
   searchMovies(query: string): Observable<any>{
     return this.http.get(`${this.apiUrl}/search`, {params: {query}});
   }
 
+  //peticion para obtener peliculas actualmente en emision
   getNowPlaying(): Observable<any>{
     return this.http.get(`${this.apiUrl}/now-playing`);
   }
 
+  //peticion para obtener detalles de 
   getMovieDetails(movieId: number){
     return this.http.get(`${this.apiUrl}/details/${movieId}`);
   }

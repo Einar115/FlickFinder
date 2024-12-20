@@ -10,6 +10,7 @@ export class PreferenciaService {
   private apiUrl = `${environment.backendUrl}/preferencias`; 
 
   constructor(private http: HttpClient) {}
+  
   // Obtener peliculas favoritas
   getPeliculasFavoritas(token: string): Observable<any[]>{
     const headers = new HttpHeaders({
@@ -40,7 +41,6 @@ export class PreferenciaService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-
     return this.http.delete<string>(`${this.apiUrl}/favoritos/delete/${id}`, { headers });
   }
 }

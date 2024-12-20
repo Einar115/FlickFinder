@@ -24,6 +24,7 @@ export class MovieDetailsComponent implements OnInit{
       this.isLoggedIn = this.authService.isLoggedIn();
   }
 
+  
   loadMoviesDetails(movieId:number): void{
     this.peliculaService.getMovieDetails(movieId).subscribe({
       next: (response)=>{

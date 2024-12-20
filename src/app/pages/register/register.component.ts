@@ -14,10 +14,7 @@ export class RegisterComponent{
   registerForm: FormGroup;
   mensajeError: string | null = null;
 
-  constructor(
-    private fb: FormBuilder,
-    private usuarioService: UsuarioService
-  ) {
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService) {
     this.registerForm = this.fb.group({
       nombreUsuario: ['', [Validators.required, Validators.minLength(3)]],
       correo: ['', [Validators.required, Validators.email]],
@@ -26,6 +23,7 @@ export class RegisterComponent{
     });
   }
 
+  // Registra el usuario usando usuarioService para la peticion
   onSubmit(): void {
     if (this.registerForm.valid) {
       const usuario: Usuario = this.registerForm.value;
